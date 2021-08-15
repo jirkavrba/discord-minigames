@@ -14,4 +14,8 @@ public class DiscordConfiguration {
      */
     private String token;
 
+    /**
+     * ID of the guild used for testing the bot
+     */
+    private long testGuildId;
 }
