@@ -7,8 +7,8 @@ public class AkinatorEmbedBuilders {
 
     public static EmbedBuilder creatingNewGameEmbed() {
         return new EmbedBuilder()
-                .setTitle("Creating new Akinator game")
-                .setDescription("...")
+                .setTitle("Discord minigames")
+                .setDescription("Creating a new Akinator game...")
                 .setColor(DiscordColors.Green);
     }
 }

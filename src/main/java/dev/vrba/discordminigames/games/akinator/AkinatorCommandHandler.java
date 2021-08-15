@@ -14,6 +14,8 @@ public class AkinatorCommandHandler implements SlashCommandCreateListener {
             return;
         }
 
+        event.getInteraction().respondLater().join();
+
         Message message = event.getInteraction()
                 .createFollowupMessageBuilder()
                 .addEmbed(AkinatorEmbedBuilders.creatingNewGameEmbed())
