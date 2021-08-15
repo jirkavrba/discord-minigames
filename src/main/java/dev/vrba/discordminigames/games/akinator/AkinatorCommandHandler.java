@@ -1,5 +1,7 @@
 package dev.vrba.discordminigames.games.akinator;
 
+import com.markozajc.akiwrapper.core.exceptions.ServerNotFoundException;
+import dev.vrba.discordminigames.games.akinator.entities.AkinatorGame;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.event.interaction.SlashCommandCreateEvent;
 import org.javacord.api.listener.interaction.SlashCommandCreateListener;
@@ -27,6 +29,34 @@ public class AkinatorCommandHandler implements SlashCommandCreateListener {
                 .addEmbed(AkinatorEmbedBuilders.creatingNewGameEmbed())
                 .send()
                 .join();
+
+        try {
+            var game = this.manager.createGame(
+                    event.getInteraction().getUser().getId(),
+                    message.getId()
+            );
+
+
+            this.updateNextQuestion(message, game);
+        }
+        catch (ServerNotFoundException exception) {
+            message.edit(AkinatorEmbedBuilders.serverNotFoundException());
+        }
+    }
+
+    private void updateNextQuestion(Message message, AkinatorGame game) {
+        this.manager.getApiWrapperById(game.getId())
+                .ifPresentOrElse(
+                        api -> {
+                            var question = api.getCurrentQuestion();
+
+                            if (question != null) {
+                                message.edit(AkinatorEmbedBuilders.createQuestionMessage(question));
+                                AkinatorEmbedBuilders.reactionEmojis.forEach(emoji ->  message.addReaction(emoji.getFirst()));
+                            }
+                        },
+                        () -> message.edit(AkinatorEmbedBuilders.missingApiInstance())
+                );
     }
 
     private boolean shouldHandle(SlashCommandCreateEvent event) {
