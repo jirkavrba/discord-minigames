@@ -4,21 +4,13 @@ import com.markozajc.akiwrapper.Akiwrapper;
 import com.markozajc.akiwrapper.core.entities.Question;
 import dev.vrba.discordminigames.utilities.DiscordColors;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
-import org.springframework.data.util.Pair;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-public class AkinatorEmbedBuilders {
+import static dev.vrba.discordminigames.games.akinator.AkinatorCommandHandler.REACTION_EMOJIS;
 
-    public static final List<Pair<String, Akiwrapper.Answer>> reactionEmojis = List.of(
-            Pair.of("\uD83D\uDC4D", Akiwrapper.Answer.YES),
-            Pair.of("\uD83D\uDE42", Akiwrapper.Answer.PROBABLY),
-            Pair.of("\uD83D\uDE15", Akiwrapper.Answer.DONT_KNOW),
-            Pair.of("\uD83D\uDE43", Akiwrapper.Answer.PROBABLY_NOT),
-            Pair.of("\uD83D\uDC4E", Akiwrapper.Answer.NO)
-    );
+public class AkinatorEmbedBuilders {
 
     public static EmbedBuilder creatingNewGameEmbed() {
         return new EmbedBuilder()
@@ -42,7 +34,7 @@ public class AkinatorEmbedBuilders {
     }
 
     public static EmbedBuilder createQuestionMessage(Question question) {
-        var emojis = reactionEmojis.stream()
+        var emojis = REACTION_EMOJIS.stream()
                 .map(pair -> String.format("%s - %s",
                         pair.getFirst(),
                         pair.getSecond().toString()
