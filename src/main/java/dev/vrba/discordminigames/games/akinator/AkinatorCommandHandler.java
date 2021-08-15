@@ -8,6 +8,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class AkinatorCommandHandler implements SlashCommandCreateListener {
 
+    private final AkinatorGamesManager manager;
+
+    public AkinatorCommandHandler(AkinatorGamesManager manager) {
+        this.manager = manager;
+    }
+
     @Override
     public void onSlashCommandCreate(SlashCommandCreateEvent event) {
         if (!shouldHandle(event)) {
