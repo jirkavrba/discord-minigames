@@ -63,11 +63,11 @@ public class DiscordService {
                     .getServerById(configuration.getTestGuildId())
                     .orElseThrow(() -> new IllegalArgumentException("Cannot find the configured test guild by its ID!"));
 
-            commands.forEach(command -> command.createForServer(testServer));
+            commands.forEach(command -> command.createForServer(testServer).join());
         }
         // If running in the production, register all commands globally instead
         else {
-            commands.forEach(command -> command.createGlobal(this.api));
+            commands.forEach(command -> command.createGlobal(this.api).join());
         }
     }
 
