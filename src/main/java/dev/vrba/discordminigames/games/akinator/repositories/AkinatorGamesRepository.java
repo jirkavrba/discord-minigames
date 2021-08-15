@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface AkinatorGamesRepository extends CrudRepository<AkinatorGame, UUID > {
+public interface AkinatorGamesRepository extends CrudRepository<AkinatorGame, UUID> {
 }
