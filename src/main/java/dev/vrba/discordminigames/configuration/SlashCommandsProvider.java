@@ -1,6 +1,6 @@
 package dev.vrba.discordminigames.configuration;
 
-import org.javacord.api.interaction.SlashCommand;
+import org.javacord.api.interaction.SlashCommandBuilder;
 
 import java.util.List;
 
@@ -13,6 +13,6 @@ public interface SlashCommandsProvider {
     /**
      * @return a list of all slash commands provided by the given component
      */
-    List<SlashCommand> getSlashCommands();
+    List<SlashCommandBuilder> getSlashCommands();
 
 }
